@@ -58,7 +58,6 @@ var controller = {
       return res.status(400).send({
         status: "Error de validación",
         msg: "No se han podido validar los datos del formulario",
-        ç,
       });
     }
 
