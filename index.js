@@ -15,6 +15,7 @@ app.use(cors({
 
 mongoose.Promise = global.Promise;
 
+
 mongoose.connect('mongodb+srv://vicboltmadrid:du4oXtAwosfA0CMs@rosanadb.mtxmv1m.mongodb.net/?retryWrites=true&w=majority&appName=RosanaDB', { useNewUrlParser: true }).then(() =>{
     console.log('Success! DB Connected')
 
