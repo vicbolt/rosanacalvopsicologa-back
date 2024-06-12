@@ -18,6 +18,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/rosana', { useNewUrlParser: true }).then(() =>{
     console.log('Success! DB Connected')
 
+    
     app.listen(port, () =>{
         console.log('El servidor corre en el puerto ' + port)
     })
