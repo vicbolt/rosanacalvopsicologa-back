@@ -7,7 +7,7 @@ var app = require('./app')
 var port = 4400;
 
 app.use(cors({
-    origin: 'mongodb+srv://vicboltmadrid:du4oXtAwosfA0CMs@rosanadb.mtxmv1m.mongodb.net/?retryWrites=true&w=majority&appName=RosanaDB', // Permite solicitudes desde este origen
+    origin: 'https://www.rosanapsicologa.es', // Permite solicitudes desde este origen
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
     credentials: true // Permite cookies y encabezados de autorización
