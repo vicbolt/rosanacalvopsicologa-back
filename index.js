@@ -6,12 +6,14 @@ const cors = require('cors');
 var app = require('./app')
 var port = 4400;
 
-app.use(cors({
-    origin: 'https://www.rosanapsicologa.es', // Permite solicitudes desde este origen
+const corsOptions = {
+    origin: '*', // Permite solicitudes desde cualquier origen
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
     credentials: true // Permite cookies y encabezados de autorización
-}));
+};
+
+app.use(cors(corsOptions));
 
 mongoose.Promise = global.Promise;
 
