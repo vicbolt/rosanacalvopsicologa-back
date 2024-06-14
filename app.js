@@ -14,7 +14,6 @@ app.use(bodyParser.json())
 
 
 //FICHEROS Y RUTAS
-var ejemplo_routes = require('./routes/ejemplo')
 var mensaje_routes = require('./routes/mensaje')
 
 
@@ -30,8 +29,8 @@ app.use((req, res, next) => {
 
 
 //RUTAS
-// app.use('/', ejemplo_routes);
-app.use('/api/', mensaje_routes);
+
+app.use('/', mensaje_routes);
 
 
 
