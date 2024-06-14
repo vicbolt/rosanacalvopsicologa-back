@@ -14,7 +14,7 @@ app.use(cors({
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(url, { useNewUrlParser: true }).then(() =>{
+mongoose.connect(url, { useUnifiedTopology: true }).then(() => {
     console.log('Success! DB Connected');
 
     // Utiliza el puerto proporcionado por Vercel o por defecto al 3000
@@ -23,4 +23,8 @@ mongoose.connect(url, { useNewUrlParser: true }).then(() =>{
     app.listen(port, () => {
         console.log('Server running on port ' + port);
     });
-}).catch(err => console.log(err));
+}).catch(err => {
+    console.error('Error connecting to the database', err);
+});
+
+module.exports = app; // Exporta la aplicación Express
