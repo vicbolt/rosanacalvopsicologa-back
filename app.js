@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 //RUTAS
 
-app.use('/', mensaje_routes);
+app.use('/api/', mensaje_routes);
 
 
 

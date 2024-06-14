@@ -1,9 +1,9 @@
 'use strict';
 
-// var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 // const cors = require('cors');
 
-// var app = require('./app')
+var app = require('./app')
 // var port = 4400;
 
 // app.use(cors({
@@ -15,13 +15,13 @@
 
 // mongoose.Promise = global.Promise;
 
-// mongoose.connect('mongodb://localhost:27017/rosana', { useNewUrlParser: true }).then(() =>{
-//     console.log('Success! DB Connected')
+mongoose.connect('mongodb+srv://vicboltmadrid:IJXgDWBNSPQBhDcJ@rosanadb.mtxmv1m.mongodb.net/?retryWrites=true&w=majority&appName=RosanaDB', { useNewUrlParser: true }).then(() =>{
+    console.log('Success! DB Connected')
 
-//     app.listen(port, () =>{
-//         console.log('El servidor corre en el puerto ' + port)
-//     })
-// })
+    app.listen(() =>{
+        console.log('Server works!')
+    })
+})
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
