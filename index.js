@@ -2,8 +2,7 @@
 
 var mongoose = require('mongoose');
 const cors = require('cors');
-
-var app = require('./app')
+var app = require('./app');
 var url = 'mongodb+srv://vicboltmadrid:IJXgDWBNSPQBhDcJ@rosanadb.mtxmv1m.mongodb.net/?retryWrites=true&w=majority&appName=RosanaDB';
 
 app.use(cors({
@@ -16,11 +15,12 @@ app.use(cors({
 mongoose.Promise = global.Promise;
 
 mongoose.connect(url, { useNewUrlParser: true }).then(() =>{
-    console.log('Success! DB Connected')
+    console.log('Success! DB Connected');
 
-    app.listen(() =>{
-        console.log('DB working in: ' + url)
-    })
-})
+    // Utiliza el puerto proporcionado por Vercel o por defecto al 3000
+    const port = process.env.PORT || 3000;
 
-
+    app.listen(port, () => {
+        console.log('Server running on port ' + port);
+    });
+}).catch(err => console.log(err));
