@@ -12,7 +12,6 @@ var app = express();
 
 // Middleware necesario
 app.use(express.json());  // Esto permite leer JSON en req.body
-app.use(cors());  // Habilita CORS para que el front pueda hacer peticiones
 
 //MIDDLEWARES
 app.use(bodyParser.urlencoded({extended: false}));
