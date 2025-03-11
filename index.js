@@ -6,7 +6,7 @@ var app = require('./app');
 
 //AUTORIZACIONE
 app.use(cors({
-    origin: '*', // Permite solicitudes desde este origen
+    origin: ['http://localhost:4200', 'https://rosanacalvopsicologa.com'], // Permite solicitudes desde este origen
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization', '*'], // Encabezados permitidos
     credentials: true // Permite cookies y encabezados de autorización
