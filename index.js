@@ -1,16 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose');
-const cors = require('cors');
 var app = require('./app');
 
-//AUTORIZACIONE
-app.use(cors({
-    origin: ['https://rosanacalvopsicologa.com'], // Add the production domain
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Methods allowed
-    allowedHeaders: ['Content-Type', 'Authorization'], // Headers allowed
-    credentials: true // Allow credentials
-}));
 
 
 mongoose.Promise = global.Promise;

@@ -5,6 +5,14 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
+// Definir las opciones de CORS 
+const corsOptions = { 
+    credentials : true , 
+    origin : [ 'http://localhost:4200' , 'https://rosanacalvopsicologa.com' ] // Incluir en la lista blanca los dominios que desea permitir
+ }; 
+
+app.use ( cors (corsOptions)); // Utilice el middleware cors con sus opciones // Sus controladores de ruta y otro middleware van aquí app.listen ( 3000 , () => { console.log ( 'El servidor se está ejecutando en el puerto 3000' ) ; });
+
 
 
 //INICIO DE EXPRESS
