@@ -6,11 +6,12 @@ var app = require('./app');
 
 //AUTORIZACIONE
 app.use(cors({
-    origin: ['http://localhost:4200', 'https://rosanacalvopsicologa.com'], // Permite solicitudes desde este origen
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
-    credentials: true // Permite cookies y encabezados de autorización
+    origin: ['http://localhost:4200', 'https://rosanacalvopsicologa.com'], // Add the production domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Methods allowed
+    allowedHeaders: ['Content-Type', 'Authorization'], // Headers allowed
+    credentials: true // Allow credentials
 }));
+
 
 mongoose.Promise = global.Promise;
 
