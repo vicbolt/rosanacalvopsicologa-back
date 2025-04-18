@@ -8,14 +8,14 @@ var cors = require('cors');
 //INICIO DE EXPRESS
 var app = express();
 
-// Definir las opciones de CORS 
-const corsOptions = { 
-    credentials: true, 
-    origin: ['http://localhost:4200', 'https://rosanacalvopsicologa.com'] // Incluir en la lista blanca los dominios que desea permitir
-}; 
+// Configura CORS
+app.use(cors({
+    origin: ['http://localhost:4200', 'https://rosanacalvopsicologa.com'], // los dominios que pueden acceder
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }));
 
-app.use(cors(corsOptions)); // Utilice el middleware cors con sus opciones
-
+  
 // Middleware necesario
 app.use(express.json());  // Esto permite leer JSON en req.body
 
