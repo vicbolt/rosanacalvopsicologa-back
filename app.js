@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //FICHEROS Y RUTAS
 var mensaje_routes = require('./routes/mensaje')
 var user_routes = require('./routes/user');
+var review_routes = require('./routes/review');
 
 // configurar cabeceras http
 app.use((req, res, next) => {
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
 
 app.use('/api/', mensaje_routes);
 app.use('/api/', user_routes);
+app.use('/api/', review_routes);
 
 
 module.exports = app;
