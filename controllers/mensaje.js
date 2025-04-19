@@ -1,7 +1,7 @@
 "use strict";
 
-var validator = require("validator");
-const nodemailer = require("nodemailer");
+import validator from "validator";
+import nodemailer from "nodemailer";
 
 // Configuración del transportador SMTP
 const transporter = nodemailer.createTransport({
@@ -12,9 +12,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-var Mensaje = require("../models/mensaje");
+import Mensaje from "../models/mensaje.js";
 
-var controller = {
+const MensajeController = {
   getMsg: (req, res) => {
     Mensaje.find()
       .sort("-id")
@@ -181,4 +181,4 @@ var controller = {
   },
 };
 
-module.exports = controller;
+export const { saveMsg, getMsg } = MensajeController;

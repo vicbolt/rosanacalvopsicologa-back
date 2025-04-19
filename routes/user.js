@@ -1,7 +1,7 @@
 'use strict'
 
-var express = require ('express');
-var UserController = require('../controllers/user');
+import express from 'express';
+import UserController from '../controllers/user.js';
 
 var router = express.Router();
 
@@ -10,4 +10,4 @@ router.post('/login', UserController.login);
 
 
 
-module.exports = router;
+export default router;

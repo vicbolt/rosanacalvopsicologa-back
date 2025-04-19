@@ -1,6 +1,6 @@
 "use strict";
 
-const Course = require("../models/course");
+import Course from "../models/course.js";
 
 const courseController = {
   createCourse: async (req, res) => {
@@ -126,4 +126,4 @@ const courseController = {
   }
 };
 
-module.exports = courseController;
+export const { createCourse, getAllCourses, getVigentes, deleteCourse, markCourseAsNotVigente } = courseController;

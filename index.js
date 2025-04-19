@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var app = require('./app');
+import mongoose from 'mongoose';
+import app from './app.js';
 
 
 
@@ -28,4 +28,5 @@ app.listen(port, () => {
     console.log('Server running on port ' + port);
 });
 
-module.exports = app; // Exporta la aplicación Express
+
+export default app; // Exporta la aplicación Express

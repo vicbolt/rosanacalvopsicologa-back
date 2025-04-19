@@ -1,11 +1,11 @@
 "use strict";
 
-var validator = require("validator");
-var User = require("../models/user");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import validator from "validator"; 
+import User from "../models/user.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-var controller = {
+var UserController = {
 
   register: async (req, res) => {
     // RECOGER LOS DATOS DEL USUARIO
@@ -114,4 +114,4 @@ var controller = {
   },
 };
 
-module.exports = controller;
+export default UserController;

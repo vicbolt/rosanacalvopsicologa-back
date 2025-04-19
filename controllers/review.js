@@ -1,23 +1,63 @@
-"use strict";
+'use strict';
 
-const Review = require("../models/review");
+import Review from '../models/review.js';
+import transporter from "../emailTransporter.js"; 
+
+const senderEmail = transporter.options.auth.user;
 
 const reviewController = {
   createReview: async (req, res) => {
-    const { nombre, edad, motivo, review, revisado, aceptada } = req.body;
+    const { nombre, edad, motivo, review, revisada, aceptada } = req.body;
 
     try {
-      const newReview = new Review({ nombre, edad, motivo, review, revisado, aceptada });
+      const newReview = new Review({
+        nombre,
+        edad,
+        motivo,
+        review,
+        revisada,
+        aceptada,
+      });
       await newReview.save();
+
+      // Configurar el correo electrónico
+      const mailOptions = {
+        from: senderEmail,
+        to: senderEmail,
+        subject: 'Nueva reseña disponible',
+        html: `
+              <h1>Nueva Reseña</h1>
+              <p>Tienes una nueva reseña en la página web pendiente de validar:</p>
+              <ul>
+                <li><strong>Nombre:</strong> ${nombre}</li>
+                <li><strong>Edad:</strong> ${edad}</li>
+                <li><strong>Motivo:</strong> ${motivo}</li>
+                <li><strong>Reseña:</strong> ${review}</li>
+              </ul>
+
+              <a href="rosanacalvopsicologa.com">Rosanacalvopsicologa.com</a>
+              
+            `,
+      };
+
+      // Enviar el correo electrónico
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error al enviar el correo electrónico:', error);
+        } else {
+          console.log('Correo electrónico enviado:', info.response);
+        }
+      });
+
       return res.status(201).send({
-        msg: "Review created successfully",
-        review: newReview
+        msg: 'Review created successfully',
+        review: newReview,
       });
     } catch (err) {
-      console.error("Error creating review:", err);
+      console.error('Error creating review:', err);
       return res.status(500).send({
-        msg: "Error creating review",
-        err
+        msg: 'Error creating review',
+        err,
       });
     }
   },
@@ -26,14 +66,14 @@ const reviewController = {
     try {
       const reviews = await Review.find();
       return res.status(200).send({
-        msg: "Reviews retrieved successfully",
-        reviews
+        msg: 'Reviews retrieved successfully',
+        reviews,
       });
     } catch (err) {
-      console.error("Error retrieving reviews:", err);
+      console.error('Error retrieving reviews:', err);
       return res.status(500).send({
-        msg: "Error retrieving reviews",
-        err
+        msg: 'Error retrieving reviews',
+        err,
       });
     }
   },
@@ -42,46 +82,52 @@ const reviewController = {
     try {
       const unreviewedReviews = await Review.find({ revisada: false });
       return res.status(200).send({
-        msg: "Unreviewed reviews retrieved successfully",
-        reviews: unreviewedReviews
+        msg: 'Unreviewed reviews retrieved successfully',
+        reviews: unreviewedReviews,
       });
     } catch (err) {
-      console.error("Error retrieving unreviewed reviews:", err);
+      console.error('Error retrieving unreviewed reviews:', err);
       return res.status(500).send({
-        msg: "Error retrieving unreviewed reviews",
-        err
+        msg: 'Error retrieving unreviewed reviews',
+        err,
       });
     }
   },
 
   getAceptada: async (req, res) => {
     try {
-      const reviewedReviews = await Review.find({ aceptada: true, revisada: true });
+      const reviewedReviews = await Review.find({
+        aceptada: true,
+        revisada: true,
+      });
       return res.status(200).send({
-        msg: "Reviewed reviews retrieved successfully",
-        reviews: reviewedReviews
+        msg: 'Reviewed reviews retrieved successfully',
+        reviews: reviewedReviews,
       });
     } catch (err) {
-      console.error("Error retrieving reviewed reviews:", err);
+      console.error('Error retrieving reviewed reviews:', err);
       return res.status(500).send({
-        msg: "Error retrieving reviewed reviews",
-        err
+        msg: 'Error retrieving reviewed reviews',
+        err,
       });
     }
   },
 
   getNoAceptada: async (req, res) => {
     try {
-      const reviewedReviews = await Review.find({ aceptada: false, revisada: true });
+      const reviewedReviews = await Review.find({
+        aceptada: false,
+        revisada: true,
+      });
       return res.status(200).send({
-        msg: "Reviewed reviews retrieved successfully",
-        reviews: reviewedReviews
+        msg: 'Reviewed reviews retrieved successfully',
+        reviews: reviewedReviews,
       });
     } catch (err) {
-      console.error("Error retrieving reviewed reviews:", err);
+      console.error('Error retrieving reviewed reviews:', err);
       return res.status(500).send({
-        msg: "Error retrieving reviewed reviews",
-        err
+        msg: 'Error retrieving reviewed reviews',
+        err,
       });
     }
   },
@@ -98,23 +144,22 @@ const reviewController = {
 
       if (!updatedReview) {
         return res.status(404).send({
-          msg: "Review not found"
+          msg: 'Review not found',
         });
       }
 
       return res.status(200).send({
-        msg: "Review status updated successfully",
-        review: updatedReview
+        msg: 'Review status updated successfully',
+        review: updatedReview,
       });
     } catch (err) {
-      console.error("Error updating review status:", err);
+      console.error('Error updating review status:', err);
       return res.status(500).send({
-        msg: "Error updating review status",
-        err
+        msg: 'Error updating review status',
+        err,
       });
     }
-  }
-
+  },
 };
 
-module.exports = reviewController;
+export const { createReview, getAllReviews, getNoRevisado, getAceptada, getNoAceptada, updateReviewStatus } = reviewController;

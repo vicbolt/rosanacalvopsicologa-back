@@ -1,27 +1,16 @@
 'use strict';
 
-const express = require('express');
-const reviewController = require('../controllers/review');
+import express from 'express';
+import { createReview, getAllReviews, getNoRevisado, getAceptada, getNoAceptada, updateReviewStatus } from '../controllers/review.js';
 
 const router = express.Router();
 
-// Route for creating a reviews
-router.post('/createReview', reviewController.createReview);
-
-// Route for getting all reviews
-router.get('/getAllReviews', reviewController.getAllReviews);
-
-// Route for getting revisado: false
-router.get('/getNoRevisado', reviewController.getNoRevisado);
-
-// Route for getting ACEPTADA: TRUE
-router.get('/getAceptada', reviewController.getAceptada);
-
-// Route for getting ACEPTADA: FALSE
-router.get('/getNoAceptada', reviewController.getNoAceptada);
-
-// Route for updating review status
-router.post('/updateReviewStatus', reviewController.updateReviewStatus);
+router.post('/createReview', createReview);
+router.get('/getAllReviews', getAllReviews);
+router.get('/getNoRevisado', getNoRevisado);
+router.get('/getAceptada', getAceptada);
+router.get('/getNoAceptada', getNoAceptada);
+router.patch('/updateReviewStatus', updateReviewStatus);
 
 
-module.exports = router;
+export default router;

@@ -1,15 +1,12 @@
 'use strict'
 
-var express = require ('express');
+import express from 'express';
+import { saveMsg, getMsg } from '../controllers/mensaje.js'; // Use named imports
 
-//REALES
-var MensajeController = require('../controllers/mensaje')
-
-var router = express.Router();
-
+const router = express.Router();
 
 //RUTAS DE VERDAD
-router.post('/saveMsg', MensajeController.saveMsg)
-router.get('/getMsg', MensajeController.getMsg)
+router.post('/saveMsg', saveMsg);
+router.get('/getMsg', getMsg);
 
-module.exports = router;
+export default router;

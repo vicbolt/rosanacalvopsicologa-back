@@ -1,12 +1,13 @@
 'use strict';
 
-const express = require('express');
-const courseController = require('../controllers/course');
+import express from 'express';
+import { createCourse, getAllCourses, getVigentes, deleteCourse, markCourseAsNotVigente } from '../controllers/course.js';
+
+import multer from 'multer'; 
+import path from 'path';
+
 const router = express.Router();
 
-// IMPORTAR MULTER CONFIG
-const multer = require('multer');
-const path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,14 +35,14 @@ const upload = multer({
 });
 
 // RUTAS
-router.post('/createCourse', upload.single('imagen'), courseController.createCourse);
-router.get('/getAllCourses', courseController.getAllCourses);
-router.get('/getVigentes', courseController.getVigentes);
+router.post('/createCourse', upload.single('imagen'), createCourse);
+router.get('/getAllCourses', getAllCourses);
+router.get('/getVigentes', getVigentes);
 
 // Route for deleting a course
-router.delete('/deleteCourse/:id', courseController.deleteCourse);
+router.delete('/deleteCourse/:id', deleteCourse);
 
 // Route for marking a course as not vigente
-router.post('/markCourseAsNotVigente/:id', courseController.markCourseAsNotVigente);
+router.post('/markCourseAsNotVigente/:id', markCourseAsNotVigente);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose');
+import mongoose from "mongoose";
 var Schema = mongoose.Schema;
 
-var mensaje = Schema({
+var mensajeSchema = Schema({
     name: String,
     email: String,
     comPreference: String,
@@ -12,4 +12,5 @@ var mensaje = Schema({
     msg: String,
 })
 
-module.exports =  mongoose.model('Mensaje', mensaje)
+const Mensaje = mongoose.model('Mensaje', mensajeSchema);
+export default Mensaje;

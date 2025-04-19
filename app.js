@@ -1,9 +1,9 @@
 'use strict'
 
 //MODULOS
-var express = require('express');
-var bodyParser = require('body-parser');
-var cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
 //INICIO DE EXPRESS
 var app = express();
@@ -25,15 +25,15 @@ app.use('/uploads', express.static('uploads')); // Para leer imagenes
 app.use(bodyParser.urlencoded({extended: false}));
 
 //FICHEROS Y RUTAS
-var mensaje_routes = require('./routes/mensaje');
-var user_routes = require('./routes/user');
-var review_routes = require('./routes/review');
-var course_routes = require('./routes/course');
+import mensajeRoutes from './routes/mensaje.js'; // Changed to import
+import userRoutes from './routes/user.js'; // Changed to import
+import reviewRoutes from './routes/review.js'; // Changed to import
+import courseRoutes from './routes/course.js';
 
 //RUTAS
-app.use('/api/', mensaje_routes);
-app.use('/api/', user_routes);
-app.use('/api/', review_routes);
-app.use('/api/', course_routes);
+app.use('/api/', mensajeRoutes);
+app.use('/api/', userRoutes);
+app.use('/api/', reviewRoutes);
+app.use('/api/', courseRoutes);
 
-module.exports = app;
+export default app;
