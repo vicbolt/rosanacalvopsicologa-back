@@ -4,6 +4,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import analyticsRoutes from './routes/analytics.js';
 
 //INICIO DE EXPRESS
 var app = express();
@@ -35,5 +36,6 @@ app.use('/api/', mensajeRoutes);
 app.use('/api/', userRoutes);
 app.use('/api/', reviewRoutes);
 app.use('/api/', courseRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 export default app;
