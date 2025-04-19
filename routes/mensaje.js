@@ -1,7 +1,7 @@
 'use strict'
 
 import express from 'express';
-import { saveMsg, getMsg } from '../controllers/mensaje.js'; // Use named imports
+import { saveMsg, getMsg } from '../controllers/mensaje.js';
 
 const router = express.Router();
 

@@ -12,12 +12,13 @@ var url = 'mongodb+srv://vicboltmadrid:IJXgDWBNSPQBhDcJ@rosanadb.mtxmv1m.mongodb
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(url, { useUnifiedTopology: true });
-        console.log('Success! DB Connected');
+      await mongoose.connect(url);
+      console.log('Success! DB Connected');
     } catch (err) {
-        console.error('Error connecting to the database', err);
+      console.error('Error connecting to the database:', err);
+      process.exit(1);
     }
-};
+  };
 
 connectDB();
 
@@ -29,4 +30,4 @@ app.listen(port, () => {
 });
 
 
-export default app; // Exporta la aplicación Express
+export default app; 

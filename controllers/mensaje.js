@@ -1,42 +1,29 @@
-"use strict";
+'use strict';
 
-import validator from "validator";
-import nodemailer from "nodemailer";
+import validator from 'validator';
+import transporter from '../emailTransporter.js';
 
-// Configuración del transportador SMTP
-const transporter = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: "vegagiordannogarcia@gmail.com",
-    pass: "yknb msay izaa ybmq",
-  },
-});
+const senderEmail = transporter.options.auth.user;
 
-import Mensaje from "../models/mensaje.js";
+import Mensaje from '../models/mensaje.js';
 
 const MensajeController = {
+
   getMsg: (req, res) => {
     Mensaje.find()
-      .sort("-id")
+      .sort('-id')
       .exec()
       .then((mensajes) => {
-        if (mensajes.length > 0) {
-          return res.status(200).send({
-            status: "Success",
-            mensajes,
-          });
-        } else {
-          return res.status(404).send({
-            status: "Error",
-            msg: "Error al encontrar los datos",
-          });
-        }
+        // Always return a 200 status with the messages array
+        return res.status(200).send({
+          status: 'Success',
+          mensajes, // This will be an empty array if no messages are found
+        });
       })
-
       .catch((err) => {
         return res.status(500).send({
-          status: "Error",
-          msg: "Fallo al buscar los mensajes",
+          status: 'Error',
+          msg: 'Fallo al buscar los mensajes',
         });
       });
   },
@@ -51,13 +38,13 @@ const MensajeController = {
       var validator_email = !validator.isEmpty(params.email);
       var validator_comPreference = !validator.isEmpty(params.comPreference);
       var validator_time = !validator.isEmpty(params.time);
-      
+
       var validator_phone = !validator.isEmpty(params.phone);
       var validator_msg = !validator.isEmpty(params.msg);
     } catch (err) {
       return res.status(400).send({
-        status: "Error de validación",
-        msg: "No se han podido validar los datos del formulario",
+        status: 'Error de validación',
+        msg: 'No se han podido validar los datos del formulario',
       });
     }
 
@@ -83,9 +70,9 @@ const MensajeController = {
         .save()
         .then(() => {
           const mailOptions = {
-            from: "vegagiordannogarcia@gmail.com",
-            to: "vegagiordannogarcia@gmail.com",
-            subject: "Nuevo formulario recibido",
+            from: senderEmail,
+            to: senderEmail,
+            subject: 'Nuevo formulario recibido',
             html: `
             <div style="background-color: rgba(143, 125, 211, 0.25); padding: 20px; border-radius: 10px; font-family: Arial, sans-serif; color: #333333;">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -114,18 +101,18 @@ const MensajeController = {
           };
 
           transporter.sendMail(mailOptions, (error, info) => {
-            console.log("Entra");
+            console.log('Entra');
             if (error) {
-              console.error("Error al enviar el correo electrónico:", error);
+              console.error('Error al enviar el correo electrónico:', error);
             } else {
-              console.log("Correo electrónico enviado:", info.response);
+              console.log('Correo electrónico enviado:', info.response);
             }
           });
 
           const mailOptions2 = {
-            from: "vegagiordannogarcia@gmail.com",
+            from: senderEmail,
             to: mensaje.email,
-            subject: "Gracias por contactar con Rosana Calvo",
+            subject: 'Gracias por contactar con Rosana Calvo',
             html: `
             <html lang="es">
               <head>
@@ -156,25 +143,25 @@ const MensajeController = {
           };
 
           transporter.sendMail(mailOptions2, (error, info) => {
-            console.log("Entra");
+            console.log('Entra');
             if (error) {
-              console.error("Error al enviar el correo electrónico:", error);
+              console.error('Error al enviar el correo electrónico:', error);
             } else {
-              console.log("Correo electrónico enviado:", info.response);
+              console.log('Correo electrónico enviado:', info.response);
             }
           });
 
           return res.status(200).send({
-            status: "Success",
-            msg: "Se ha guardado en la base de datos",
-            mensaje
+            status: 'Success',
+            msg: 'Se ha guardado en la base de datos',
+            mensaje,
           });
         })
 
         .catch((err) => {
           return res.status(400).send({
-            status: "Error",
-            msg: "ERROR. No se ha guardado en la base de datos",
+            status: 'Error',
+            msg: 'ERROR. No se ha guardado en la base de datos',
           });
         });
     }

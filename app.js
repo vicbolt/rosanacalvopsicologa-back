@@ -25,9 +25,9 @@ app.use('/uploads', express.static('uploads')); // Para leer imagenes
 app.use(bodyParser.urlencoded({extended: false}));
 
 //FICHEROS Y RUTAS
-import mensajeRoutes from './routes/mensaje.js'; // Changed to import
-import userRoutes from './routes/user.js'; // Changed to import
-import reviewRoutes from './routes/review.js'; // Changed to import
+import mensajeRoutes from './routes/mensaje.js';
+import userRoutes from './routes/user.js'; 
+import reviewRoutes from './routes/review.js'; 
 import courseRoutes from './routes/course.js';
 
 //RUTAS
