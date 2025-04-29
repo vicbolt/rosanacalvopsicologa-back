@@ -137,7 +137,7 @@ const reviewController = {
 
     try {
       const updatedReview = await Review.findByIdAndUpdate(
-        id,
+        { _id: id },
         { revisada, aceptada },
         { new: true }
       );

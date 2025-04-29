@@ -10,6 +10,7 @@ var mensajeSchema = Schema({
     time: String,
     phone: String,
     msg: String,
+    date: { type: Date, default: Date.now }
 })
 
 const Mensaje = mongoose.model('Mensaje', mensajeSchema);

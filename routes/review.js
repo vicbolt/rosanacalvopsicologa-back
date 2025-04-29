@@ -10,7 +10,7 @@ router.get('/getAllReviews', getAllReviews);
 router.get('/getNoRevisado', getNoRevisado);
 router.get('/getAceptada', getAceptada);
 router.get('/getNoAceptada', getNoAceptada);
-router.patch('/updateReviewStatus', updateReviewStatus);
+router.post('/updateReviewStatus', updateReviewStatus);
 
 
 export default router;
